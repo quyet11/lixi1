@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // Hiển thị bảng vàng khi nhấn nút "Bảng Vàng"
     leaderboardBtn.addEventListener('click', function () {
-        fetch('http://localhost:3000/leaderboard')
+        fetch('https://lixi1.onrender.com/leaderboard')
             .then(response => response.json())
             .then(data => {
                 leaderboardTable.innerHTML = `
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Gửi dữ liệu lên server
-            fetch('http://localhost:3000/save-data', {
+            fetch('https://lixi1.onrender.com/save-data', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
