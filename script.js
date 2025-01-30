@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
             envelope.addEventListener('click', function () {
                 if (!localStorage.getItem('luckyMoney')) {
                     localStorage.setItem('luckyMoney', amount.toLocaleString()); // Lưu số tiền vào localStorage
-                    message.textContent = `Chúc mừng ${userName}, bạn đã được lì xì ${amount.toLocaleString()} VND! Vui lòng nhập số tài khoản và ngân hàng bạn dùng.`;
+                     message.innerHTML = `Chúc mừng ${userName}, bạn đã được lì xì <strong>${amount.toLocaleString()} VND</strong>!<br>Vui lòng nhập số tài khoản và ngân hàng bạn dùng.<br>Đừng reload, reload là mất đấy nhé!`;
                     popup.classList.remove('hidden');
                 }
             });
