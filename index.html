@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lì Xì May Mắn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="welcome-screen">
+    <h1>Chúc Mừng Năm Mới!</h1>
+
+    <p> Trong số các lì xì này sẽ có một chiếc mang mệnh giá 500.000 nhé!</p>
+    <p>Chúc mọi người may mắn!!</p>
+
+    <input type="text" id="user-name" placeholder="Tên của bạn">
+    <button id="start-btn">Xác nhận</button>
+</div>
+
+<!-- Phần lì xì bay -->
+<div id="envelopes-container" class="hidden">
+    <div id="envelopes"></div>
+</div>
+
+<!-- Popup hiển thị khi bấm vào lì xì -->
+<div id="popup" class="hidden">
+    <p id="message"></p>
+    <input type="text" id="bank-account" placeholder="Nhập số tài khoản">
+    <input type="text" id="bank-name" placeholder="Nhập tên ngân hàng">
+    <button id="submit-btn">Gửi</button>
+</div>
+<button id="leaderboard-btn">Bảng Vàng</button>
+<div id="leaderboard" class="hidden">
+    <button id="close-leaderboard">X</button>
+    <h2 style="text-align: center;">🏆 Bảng Vàng 🏆</h2>
+    <table id="leaderboard-table">
+        <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Số Tiền</th>
+            <th>Số Tài Khoản</th>
+            <th>Ngân Hàng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Dữ liệu sẽ được thêm vào đây -->
+        </tbody>
+    </table>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

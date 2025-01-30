@@ -1,0 +1,232 @@
+
+
+/* 🌟 Style cho nút Bảng Vàng */
+#leaderboard-btn {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    width: auto; /* Đảm bảo nó chỉ rộng theo nội dung */
+    max-width: 90%; /* Không cho vượt quá 90% màn hình */
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap; /* Không bị xuống dòng */
+}
+#leaderboard-btn:hover {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* 🌟 Style cho bảng vàng */
+#leaderboard {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; /* Chiếm 90% màn hình trên điện thoại */
+    max-width: 800px; /* Giới hạn kích thước trên màn hình lớn */
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+    overflow: hidden; /* Ngăn bảng bị tràn */
+}
+#leaderboard-container {
+    overflow-x: auto;
+    max-height: 80vh; /* Giới hạn chiều cao để tránh che toàn bộ màn hình */
+}
+/* 🌟 Nút đóng bảng vàng */
+/* 🌟 Nút đóng bảng */
+#close-leaderboard {
+    position: absolute;
+    top: -10px;
+    right: -1px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px; /* Bo góc nhẹ để đẹp hơn */
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+/* 🌟 Responsive cho điện thoại */
+@media (max-width: 600px) {
+    #leaderboard {
+        width: 95%; /* Chiếm nhiều không gian hơn trên điện thoại */
+        padding: 15px;
+    }
+
+    #leaderboard-table th, #leaderboard-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    #close-leaderboard {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+#close-leaderboard:hover {
+    background: darkred;
+}
+
+/* 🌟 Style cho bảng */
+#leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#leaderboard-table th {
+    background-color: #ff758c;
+    color: white;
+    font-size: 18px;
+}
+
+#leaderboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 🌟 Hiệu ứng hover trên hàng */
+#leaderboard-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('background.jpg'); /* Thêm hình nền */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome-screen {
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+}
+
+#envelopes-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.envelope {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('envelope.png');
+    background-size: cover;
+    cursor: pointer;
+    animation: randomMove 5s infinite linear; /* Di chuyển ngẫu nhiên */
+}
+@keyframes randomMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(50vw, -50vh);
+    }
+    50% {
+        transform: translate(-30vw, 70vh);
+    }
+    75% {
+        transform: translate(40vw, 20vh);
+    }
+    100% {
+        transform: translate(-20vw, -60vh);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    20% {
+        transform: translate(30px, -50px) rotate(15deg);
+    }
+    40% {
+        transform: translate(-40px, 30px) rotate(-20deg);
+    }
+    60% {
+        transform: translate(50px, -40px) rotate(10deg);
+    }
+    80% {
+        transform: translate(-30px, 50px) rotate(-15deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 90%;
+}
+
+.hidden {
+    display: none;
+}
+
+input, button {
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ffcc00;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e6b800;
+}
