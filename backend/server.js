@@ -50,29 +50,7 @@ app.get('/leaderboard', (req, res) => {
     if (fs.existsSync(dataFilePath)) {
         const fileContent = fs.readFileSync(dataFilePath, 'utf-8');
         const data = JSON.parse(fileContent);
-
-        // Trả về dữ liệu JSON dưới dạng HTML để hiển thị và chỉnh sửa
-        let html = '<h1>Bảng xếp hạng</h1>';
-        html += '<table><tr><th>Tên</th><th>Số tiền</th><th>Tài khoản ngân hàng</th><th>Ngân hàng</th><th>Hành động</th></tr>';
-
-        data.forEach((item) => {
-            html += `<tr>
-                <td>${item.name}</td>
-                <td>${item.amount}</td>
-                <td>${item.bankAccount}</td>
-                <td>${item.bankName}</td>
-                <td>
-                    <form action="/update-data/${item.name}" method="POST">
-                        <input type="number" name="amount" value="${item.amount}" />
-                        <input type="text" name="bankAccount" value="${item.bankAccount}" />
-                        <input type="text" name="bankName" value="${item.bankName}" />
-                        <button type="submit">Cập nhật</button>
-                    </form>
-                </td>
-            </tr>`;
-        });
-        html += '</table>';
-        res.send(html);
+        res.json(data);
     } else {
         res.json([]);
     }
