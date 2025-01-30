@@ -50,9 +50,59 @@ app.get('/leaderboard', (req, res) => {
     if (fs.existsSync(dataFilePath)) {
         const fileContent = fs.readFileSync(dataFilePath, 'utf-8');
         const data = JSON.parse(fileContent);
-        res.json(data);
+
+        // Trả về dữ liệu JSON dưới dạng HTML để hiển thị và chỉnh sửa
+        let html = '<h1>Bảng xếp hạng</h1>';
+        html += '<table><tr><th>Tên</th><th>Số tiền</th><th>Tài khoản ngân hàng</th><th>Ngân hàng</th><th>Hành động</th></tr>';
+
+        data.forEach((item) => {
+            html += `<tr>
+                <td>${item.name}</td>
+                <td>${item.amount}</td>
+                <td>${item.bankAccount}</td>
+                <td>${item.bankName}</td>
+                <td>
+                    <form action="/update-data/${item.name}" method="POST">
+                        <input type="number" name="amount" value="${item.amount}" />
+                        <input type="text" name="bankAccount" value="${item.bankAccount}" />
+                        <input type="text" name="bankName" value="${item.bankName}" />
+                        <button type="submit">Cập nhật</button>
+                    </form>
+                </td>
+            </tr>`;
+        });
+        html += '</table>';
+        res.send(html);
     } else {
         res.json([]);
+    }
+});
+
+// Route để cập nhật dữ liệu từ form
+app.post('/update-data/:name', (req, res) => {
+    const { name } = req.params; // Lấy 'name' từ URL
+    const { amount, bankAccount, bankName } = req.body; // Lấy các dữ liệu từ form gửi lên
+
+    // Kiểm tra nếu file JSON tồn tại
+    if (fs.existsSync(dataFilePath)) {
+        const fileContent = fs.readFileSync(dataFilePath, 'utf-8');
+        let data = JSON.parse(fileContent);
+
+        // Tìm kiếm phần tử cần cập nhật
+        const index = data.findIndex(item => item.name === name);
+
+        if (index !== -1) {
+            // Cập nhật dữ liệu
+            data[index] = {...data[index], amount, bankAccount, bankName };
+
+            // Lưu lại file JSON
+            fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+            res.redirect('/leaderboard'); // Sau khi cập nhật, chuyển hướng lại trang leaderboard
+        } else {
+            res.status(404).send('Không tìm thấy dữ liệu để cập nhật.');
+        }
+    } else {
+        res.status(404).send('File dữ liệu không tồn tại.');
     }
 });
 
