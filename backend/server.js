@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
-
+const XLSX = require('xlsx');
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
@@ -11,7 +11,30 @@ app.use(cors());
 // Middleware để đọc dữ liệu từ body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// Hàm cập nhật dữ liệu vào file Excel
+function updateExcelFile() {
+    if (fs.existsSync(dataFilePath)) {
+        const fileContent = fs.readFileSync(dataFilePath, 'utf-8');
+        const data = JSON.parse(fileContent);
 
+        // Chuyển đổi dữ liệu JSON thành một worksheet
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+
+        // Ghi dữ liệu vào file Excel
+        XLSX.writeFile(workbook, excelFilePath);
+        console.log(`Dữ liệu đã được cập nhật vào ${excelFilePath}`);
+    } else {
+        console.log('Không tìm thấy file dữ liệu JSON.');
+    }
+}
+
+// Thiết lập cập nhật file Excel mỗi phút
+setInterval(updateExcelFile, 60000);
+// Middleware để đọc dữ liệu từ body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // Đường dẫn lưu trữ dữ liệu
 const dataFilePath = path.join(__dirname, 'data.json');
 app.get('/', (req, res) => {
